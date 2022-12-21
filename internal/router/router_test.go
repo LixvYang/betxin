@@ -9,8 +9,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	v1 "github.com/lixvyang/betxin/api/v1"
-	"github.com/lixvyang/betxin/api/v1/topic"
+	v1 "github.com/lixvyang/betxin/internal/api/v1"
+	"github.com/lixvyang/betxin/internal/api/v1/topic"
 
 	"github.com/gin-gonic/gin"
 	"github.com/zeebo/assert"
