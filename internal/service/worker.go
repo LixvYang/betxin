@@ -10,12 +10,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lixvyang/betxin/model"
+	"github.com/lixvyang/betxin/internal/model"
 
 	"github.com/lixvyang/betxin/internal/utils"
 	"github.com/lixvyang/betxin/internal/utils/errmsg"
-	betxinmq "github.com/lixvyang/betxin/pkg/mq"
 	betxinredis "github.com/lixvyang/betxin/internal/utils/redis"
+	betxinmq "github.com/lixvyang/betxin/pkg/mq"
 	"github.com/lixvyang/betxin/pkg/timewheel"
 
 	"github.com/fox-one/mixin-sdk-go"

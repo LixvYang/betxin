@@ -7,11 +7,11 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/lixvyang/betxin/internal/model"
 	"github.com/lixvyang/betxin/internal/router"
 	"github.com/lixvyang/betxin/internal/service"
 	"github.com/lixvyang/betxin/internal/service/dailycurrency"
 	"github.com/lixvyang/betxin/internal/utils"
-	"github.com/lixvyang/betxin/model"
 
 	betxinredis "github.com/lixvyang/betxin/internal/utils/redis"
 )

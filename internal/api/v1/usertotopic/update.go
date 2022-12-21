@@ -3,7 +3,7 @@ package usertotopic
 import (
 	"log"
 
-	"github.com/lixvyang/betxin/model"
+	"github.com/lixvyang/betxin/internal/model"
 
 	v1 "github.com/lixvyang/betxin/internal/api/v1"
 

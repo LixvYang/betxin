@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/lixvyang/betxin/model"
+	"github.com/lixvyang/betxin/internal/model"
 
 	"github.com/lixvyang/betxin/internal/utils"
 	"github.com/lixvyang/betxin/internal/utils/errmsg"

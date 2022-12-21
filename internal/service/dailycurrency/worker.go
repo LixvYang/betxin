@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lixvyang/betxin/model"
+	"github.com/lixvyang/betxin/internal/model"
 
 	"github.com/lixvyang/betxin/internal/utils"
 	betxinredis "github.com/lixvyang/betxin/internal/utils/redis"
