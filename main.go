@@ -2,10 +2,15 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
+	"runtime"
 	"syscall"
+	"time"
 
 	"github.com/lixvyang/betxin/internal/model"
 	"github.com/lixvyang/betxin/internal/router"
@@ -26,6 +31,18 @@ func main() {
 	go dailycurrency.DailyCurrency(ctx)
 	go service.Worker(ctx)
 	go router.InitRouter(signalch)
+	tm := time.Tick(time.Second)
+	go http.ListenAndServe("0.0.0.0:8888", nil)
+
+	for range tm {
+		go fmt.Println(runtime.NumGoroutine())
+	}
+	// for {
+	// 	select {
+	// 	case <-tm:
+	// 		go fmt.Println(runtime.NumGoroutine())
+	// 	}
+	// }
 
 	//attach signal
 	signal.Notify(signalch, os.Interrupt, syscall.SIGTERM)

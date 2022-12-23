@@ -77,16 +77,12 @@ func getTopSnapshotCreatedAt(client *mixin.Client, c context.Context) (time.Time
 	return snapshots[0].CreatedAt, nil
 }
 
-func getTopHundredCreated(client *mixin.Client, c context.Context) ([]mixin.Snapshot, error) {
+func getTopHundredCreated(client *mixin.Client, c context.Context) ([]*mixin.Snapshot, error) {
 	snapshots, err := client.ReadSnapshots(c, "", time.Now(), "", 50)
 	if err != nil {
 		return nil, err
 	}
-	var snapshot []mixin.Snapshot
-	for i := 0; i < len(snapshots); i++ {
-		snapshot = append(snapshot, *snapshots[i])
-	}
-	return snapshot, nil
+	return snapshots, nil
 }
 
 func sendTopCreatedAtToChannel(ctx context.Context, stats *Stats) {
@@ -98,11 +94,11 @@ func sendTopCreatedAtToChannel(ctx context.Context, stats *Stats) {
 	}
 	var wg sync.WaitGroup
 	for _, snapshot := range snapshots {
-		wg.Add(1)
 		if snapshot.CreatedAt.After(preCreatedAt) {
 			stats.updatePrevSnapshotCreatedAt(snapshot.CreatedAt)
 			if snapshot.Amount.Cmp(decimal.NewFromInt(0)) == 1 && snapshot.Type == "transfer" {
-				go func(snapshot mixin.Snapshot) {
+				wg.Add(1)
+				go func(snapshot *mixin.Snapshot) {
 					defer wg.Done()
 					// _ = HandlerNewMixinSnapshot(ctx, client, snapshot)
 					fmt.Println("来新账单啦")
