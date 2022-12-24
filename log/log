@@ -1,4 +1,5 @@
-time="2022-12-21T19:42:16+08:00" level=info Agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0" DataSize=724 HostName=lixin Ip=127.0.0.1 Method=GET Path=/ SpendTime="0 ms" status=200
+time="2022-12-24T23:22:26+08:00" level=info Agent=Go-http-client/1.1 DataSize=1937 HostName=lixin Ip=127.0.0.1 Method=POST Path=/api/v1/topic/list SpendTime="7 ms" status=200
+hod=GET Path=/ SpendTime="0 ms" status=200
 time="2022-12-21T19:42:16+08:00" level=info Agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0" DataSize=5246 HostName=lixin Ip=127.0.0.1 Method=GET Path=/static/css/index.a185304f.css SpendTime="3 ms" status=200
 time="2022-12-21T19:42:16+08:00" level=info Agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0" DataSize=185715 HostName=lixin Ip=127.0.0.1 Method=GET Path=/static/css/chunk-vendors.d92bb64a.css SpendTime="1 ms" status=200
 time="2022-12-21T19:42:16+08:00" level=info Agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0" DataSize=1362547 HostName=lixin Ip=127.0.0.1 Method=GET Path=/static/js/chunk-vendors.c1a11678.js SpendTime="1 ms" status=200

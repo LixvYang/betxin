@@ -2,8 +2,10 @@ package redis
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"testing"
+	"time"
 
 	"github.com/lixvyang/betxin/internal/utils"
 
@@ -12,7 +14,7 @@ import (
 )
 
 func TestZADD(t *testing.T) {
-	f, err := ini.Load("../../config/config.ini")
+	f, err := ini.Load("../../../configs/config.ini")
 	if err != nil {
 		log.Printf("配置文件读取错误:%s", err)
 	}
@@ -40,5 +42,23 @@ func TestZADD(t *testing.T) {
 		if vv[k] != v {
 			t.Errorf("err Val")
 		}
+	}
+}
+
+func TestGet(t *testing.T) {
+	f, err := ini.Load("../../../configs/config.ini")
+	if err != nil {
+		log.Printf("配置文件读取错误:%s", err)
+	}
+
+	utils.LoadRedis(f)
+
+	NewRedisClient(context.Background())
+	key, value := "name", "lixv"
+	Set(key, value, 10*time.Second)
+	vv := Get(key).Val()
+	fmt.Println("vv: ", vv)
+	if vv != value {
+		t.Errorf("err Val")
 	}
 }
