@@ -8,5 +8,7 @@ import (
 
 func TestMain(m *testing.M) {
 	defer goleak.VerifyTestMain(m)
+	// test goroutine leak
+	// TODO
 	main()
 }
