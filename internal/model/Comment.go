@@ -31,15 +31,27 @@ func CreateComment(data *Comment) int {
 	return errmsg.SUCCSE
 }
 
+func ListComments(tid string) ([]Comment, int, int) {
+	var comments []Comment
+	var total int64
+
+	if err := db.Model(&comments).Where("tid = ?", tid).Count(&total).Error; err != nil {
+		return comments, int(total), errmsg.ERROR
+	}
+	if err := db.Model(&comments).Where("tid = ?", tid).Find(&comments).Error; err != nil {
+		return nil, 0, errmsg.ERROR
+	}
+	return comments, int(total), errmsg.SUCCSE
+}
+
 func ListCommentByTid(tid string, limit int, offset int) ([]Comment, int, int) {
 	var comments []Comment
 	var total int64
 
-	if err := db.Model(&Comment{}).Where("tid = ?", tid).Count(&total).Error; err != nil {
+	if err := db.Model(&comments).Where("tid = ?", tid).Count(&total).Error; err != nil {
 		return comments, int(total), errmsg.ERROR
 	}
-
-	if err := db.Model(&Comment{}).Where("tid = ?", tid).Order("praise_num").Offset(offset).Limit(limit).Find(&comments).Error; err != nil {
+	if err := db.Model(&comments).Where("tid = ?", tid).Offset(offset).Limit(limit).Find(&comments).Error; err != nil {
 		return nil, 0, errmsg.ERROR
 	}
 	return comments, int(total), errmsg.SUCCSE

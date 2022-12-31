@@ -71,6 +71,33 @@ func ZADD(key string, members ...*redis.Z) {
 	r.redisClient.ZAdd(r.ctx, key, members...)
 }
 
-func ZRANGE(key string) []string {
-	return r.redisClient.ZRange(r.ctx, key, 0, -1).Val()
+func ZCARD(key string) int {
+	return int(r.redisClient.ZCard(r.ctx, key).Val())
+}
+
+// 按分数正序返回
+func ZRANGE(key string, offset, limit int) ([]string, error) {
+	return r.redisClient.ZRange(r.ctx, key, int64(offset), int64(limit-1)).Result()
+}
+
+// 按分数倒序返回
+func ZREVRANGE(key string, offset, limit int) ([]string, error) {
+	return r.redisClient.ZRevRange(r.ctx, key, int64(offset), int64(limit-1)).Result()
+}
+
+// 点赞Incr
+func Incr(key string) int64 {
+	return r.redisClient.Incr(r.ctx, key).Val()
+}
+
+func SADD(key string, members ...any) {
+	r.redisClient.SAdd(r.ctx, key, members...)
+}
+
+func SISMEMBER(key string, member any) bool {
+	return r.redisClient.SIsMember(r.ctx, key, member).Val()
+}
+
+func SREM(key string, member any) bool {
+	return r.redisClient.SRem(r.ctx, key, member).Val() == 1
 }

@@ -49,6 +49,20 @@ const (
 	// currency
 	CURRENCY_LIST  = "currency_list"
 	CURRENCY_TOTAL = "currency_total"
+
+	// comment list by tid
+	// ===================
+	// comment_list_:tid_
+	COMMENT_LIST    = "comment_list_"
+	COMMENT_MAXTIME = 9999999999999
+
+
+	// check person parise comment
+	// ===================
+	// parise_comment_cid_:cid
+	// key: uid
+	PARISECOMMENT = "parise_comment_cid_"
+	PARISECOMMENT_KEY = "uid_"
 )
 
 type Response struct {
