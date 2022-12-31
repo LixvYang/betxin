@@ -13,3 +13,71 @@ mkdir configs
 touch config.ini
 ./scripts/run.sh
 ```
+
+```
+
+├── cmd
+├── configs
+├── docs
+├── internal
+│   ├── api
+│   │   ├── sd
+│   │   └── v1
+│   │       ├── administrator
+│   │       ├── bonuse
+│   │       ├── category
+│   │       ├── collect
+│   │       ├── comment
+│   │       ├── currency
+│   │       ├── feedback
+│   │       ├── handler.go
+│   │       ├── message
+│   │       ├── mixinorder
+│   │       ├── mixpayorder
+│   │       ├── oauth
+│   │       ├── praisecomment
+│   │       ├── sendback
+│   │       ├── snapshot
+│   │       ├── swaporder
+│   │       ├── topic
+│   │       ├── upload
+│   │       ├── user
+│   │       └── usertotopic
+│   ├── model
+│   ├── router
+│   ├── service
+│   │   ├── auth.go
+│   │   ├── dailycurrency
+│   │   ├── message.go
+│   │   ├── mixinclient.go
+│   │   ├── mixpay
+│   │   ├── refund.go
+│   │   ├── snapshots.go
+│   │   ├── stoptopic.go
+│   │   ├── transfer.go
+│   │   └── worker.go
+│   └── utils
+│       ├── cors
+│       ├── errmsg
+│       ├── jwt
+│       ├── logger
+│       ├── redis
+│       ├── session
+│       ├── setting.go
+│       └── upload
+├── log
+│   ├── log
+├── main.go
+├── main_test.go
+├── pkg
+│   ├── convert
+│   ├── mq
+│   └── timewheel
+├── README.md
+├── scripts
+└── web
+    ├── admin
+    └── front
+```
+
+TODO

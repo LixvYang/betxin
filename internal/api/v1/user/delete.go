@@ -18,6 +18,6 @@ func DeleteUser(c *gin.Context) {
 		v1.SendResponse(c, errmsg.ERROR_DELETE_CATENAME, nil)
 		return
 	}
-	betxinredis.DelKeys(v1.USER_INFO+userId, v1.USER_LIST, v1.USER_TOTAL)
+	betxinredis.DelKeys(v1.USER_INFO+userId, v1.USER_LIST, v1.USER_TOTAL, v1.USERINFO+userId)
 	v1.SendResponse(c, errmsg.SUCCSE, nil)
 }
