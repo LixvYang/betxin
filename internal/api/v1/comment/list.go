@@ -1,7 +1,6 @@
 package comment
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/go-redis/redis/v8"
@@ -43,7 +42,6 @@ func ListCommentByTid(c *gin.Context) {
 	var totalCommentsByTid = v1.COMMENT_LIST + tid
 	total = betxinredis.ZCARD(totalCommentsByTid)
 	comments, _ = betxinredis.ZREVRANGE(totalCommentsByTid, r.Offset, r.Limit)
-	data = []model.Comment{}
 	for _, comment := range comments {
 		var pc model.Comment
 		convert.Unmarshal(comment, &pc)
@@ -65,8 +63,6 @@ func ListCommentByTid(c *gin.Context) {
 				Member: convert.Marshal(pc),
 			}
 			members = append(members, Z)
-			fmt.Println(int(pc.CreatedAt.UnixMilli()))
-			fmt.Println(int(math.Pow(10, 13))*(pc.PraiseNum+1) + v1.COMMENT_MAXTIME - int(pc.CreatedAt.UnixMilli()))
 		}
 		betxinredis.ZADD(totalCommentsByTid, members...)
 

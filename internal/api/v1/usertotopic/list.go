@@ -189,17 +189,51 @@ func ListUserToTopicsByTopicId(c *gin.Context) {
 }
 
 func ListUserToTopicsByUserIdNoLimit(c *gin.Context) {
+	var usetotopics []string
+	var data []model.UserToTopic
+	var code int
+	var total int
 	session := sessions.Default(c)
 	user := session.Get("userId")
 	userId := fmt.Sprintf("%v", user)
 
-	data, total, code := model.ListUserToTopicsByUserIdNoLimit(userId)
-	if code != errmsg.SUCCSE {
-		v1.SendResponse(c, errmsg.ERROR_LIST_CATEGORY, nil)
-		return
+	var totalUsertotopic = v1.USERTOTOPIC_LIST + userId
+	total = betxinredis.ZCARD(totalUsertotopic)
+	usetotopics, _ = betxinredis.ZRANGE(totalUsertotopic, 0, -1)
+	for _, usetotopic := range usetotopics {
+		var pc model.UserToTopic
+		convert.Unmarshal(usetotopic, &pc)
+		data = append(data, pc)
 	}
-	v1.SendResponse(c, errmsg.SUCCSE, ListResponse{
-		TotalCount: total,
-		List:       data,
-	})
+
+	if !betxinredis.Exists(totalUsertotopic) {
+		data, _, code = model.ListUserToTopicsByUserIdNoLimit(userId)
+		if code != errmsg.SUCCSE {
+			v1.SendResponse(c, errmsg.ERROR_LIST_CATEGORY, nil)
+		}
+
+		var members []*redis.Z
+		for _, pc := range data {
+			Z := &redis.Z{
+				Score:  float64(pc.Id),
+				Member: convert.Marshal(pc),
+			}
+			members = append(members, Z)
+		}
+		betxinredis.ZADD(totalUsertotopic, members...)
+		// 查找 redis中的数据
+		// 点赞数最多的在最后面
+
+		total = betxinredis.ZCARD(totalUsertotopic)
+		v1.SendResponse(c, errmsg.SUCCSE, ListResponse{
+			TotalCount: total,
+			List:       data,
+		})
+
+	} else {
+		v1.SendResponse(c, errmsg.SUCCSE, ListResponse{
+			TotalCount: total,
+			List:       data,
+		})
+	}
 }

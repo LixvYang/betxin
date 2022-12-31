@@ -31,14 +31,17 @@ const (
 	COLLECT_GET_USER_LIST  = "collect_get_user_list_"
 	COLLECT_GET_USER_TOTAL = "collect_get_user_total_"
 
-	USERTOTOPIC_LIST  = "usertotopic_list"
-	USERTOTOPIC_TOTAL = "usertotopic_total"
 	// 存储用户购买的topic
 	USERTOTOPIC_USER_TOTAL = "usertotopic_user_total_"
 	USERTOTOPIC_USER_LIST  = "usertotopic_user_list_"
 	// 存储哪些用户购买的topic
 	USERTOTOPIC_TOPIC_TOTAL = "usertotopic_topic_total_"
 	USERTOTOPIC_TOPIC_LIST  = "usertotopic_topic_list_"
+
+	// user_to_topic
+	// ===================
+	//  usertotopic_list_:uid
+	USERTOTOPIC_LIST = "usertotopic_list_"
 
 	//
 	USER_LIST  = "user_list"
@@ -56,13 +59,18 @@ const (
 	COMMENT_LIST    = "comment_list_"
 	COMMENT_MAXTIME = 9999999999999
 
-
 	// check person parise comment
 	// ===================
 	// parise_comment_cid_:cid
 	// key: uid
-	PARISECOMMENT = "parise_comment_cid_"
+	PARISECOMMENT     = "parise_comment_cid_"
 	PARISECOMMENT_KEY = "uid_"
+
+	// USER INFO
+	// ===================
+	// key: userinfo_:uid
+	// value: marshal useinfo
+	USERINFO = "userinfo_"
 )
 
 type Response struct {
