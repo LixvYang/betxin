@@ -31,7 +31,6 @@ func ListCommentByTid(c *gin.Context) {
 	var data []model.Comment
 	var code int
 	var comments []string
-
 	tid := c.Param("tid")
 	var r ListRequest
 	if err = c.ShouldBindJSON(&r); err != nil {
