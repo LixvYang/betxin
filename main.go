@@ -13,6 +13,7 @@ import (
 	"github.com/lixvyang/betxin/internal/service"
 	"github.com/lixvyang/betxin/internal/service/dailycurrency"
 	"github.com/lixvyang/betxin/internal/utils"
+	"github.com/lixvyang/betxin/internal/utils/cron"
 
 	betxinredis "github.com/lixvyang/betxin/internal/utils/redis"
 )
@@ -24,6 +25,7 @@ func main() {
 	ctx := context.Background()
 	model.InitDb()
 	betxinredis.NewRedisClient(ctx)
+	go cron.HeathCheck()
 	go dailycurrency.DailyCurrency(ctx)
 	go service.Worker(ctx)
 	go router.InitRouter(signalch)

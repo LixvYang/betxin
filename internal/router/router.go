@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"syscall"
+	"time"
 
 	"github.com/lixvyang/betxin/internal/api/sd"
 	v1 "github.com/lixvyang/betxin/internal/api/v1"
@@ -32,6 +33,7 @@ import (
 	"github.com/lixvyang/betxin/internal/utils/errmsg"
 	"github.com/lixvyang/betxin/internal/utils/jwt"
 	"github.com/lixvyang/betxin/internal/utils/logger"
+	"github.com/lixvyang/betxin/internal/utils/rate"
 	"github.com/lixvyang/betxin/internal/utils/session"
 
 	"github.com/gin-contrib/multitemplate"
@@ -58,9 +60,7 @@ func InitRouter(signal chan os.Signal) {
 	// nil 为不计算，避免性能消耗，上线应当设置
 	_ = r.SetTrustedProxies(nil)
 	r.HTMLRender = createMyRender()
-	r.Use(logger.Logger(), gin.Recovery(), cors.Cors())
-	// r.Use(gin.Recovery())
-	// r.Use(cors.Cors())
+	r.Use(logger.Logger(), gin.Recovery(), cors.Cors(), rate.RateLimitMiddleware(time.Second, 100, 3000))
 	if utils.AppMode != "release" {
 		r.Use(gin.Logger())
 	}
