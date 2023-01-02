@@ -24,6 +24,12 @@ var (
 	DbPassWord string
 	DbName     string
 
+	MailHost string
+	MailPort int
+	MailUser string
+	MailPass string
+	MailTo   string
+
 	Pin        string
 	ClientId   string
 	SessionId  string
@@ -93,6 +99,7 @@ func Init() {
 	LoadServer(f)
 	LoadAdmin(f)
 	LoadData(f)
+	LoadMail(f)
 	LoadMixinBot(f)
 	LoadRedis(f)
 	LoadQiniu(f)
@@ -121,6 +128,14 @@ func LoadData(file *ini.File) {
 	DbUser = file.Section("database").Key("DbUser").MustString("")
 	DbPassWord = file.Section("database").Key("DbPassWord").MustString("")
 	DbName = file.Section("database").Key("DbName").MustString("")
+}
+
+func LoadMail(file *ini.File) {
+	MailHost = file.Section("mail").Key("MailHost").MustString("")
+	MailPort = file.Section("mail").Key("MailPort").MustInt(465)
+	MailUser = file.Section("mail").Key("MailUser").MustString("")
+	MailPass = file.Section("mail").Key("MailPass").MustString("")
+	MailTo = file.Section("mail").Key("MailTo").MustString("")
 }
 
 func LoadRedis(file *ini.File) {
