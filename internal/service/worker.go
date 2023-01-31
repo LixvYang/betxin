@@ -100,9 +100,9 @@ func sendTopCreatedAtToChannel(ctx context.Context, stats *Stats) {
 				wg.Add(1)
 				go func(snapshot *mixin.Snapshot) {
 					defer wg.Done()
-					// _ = HandlerNewMixinSnapshot(ctx, client, snapshot)
+					_ = HandlerNewMixinSnapshot(ctx, *snapshot)
 					fmt.Println("来新订单了!!!")
-					mq.Publish(BETXIN_WORKER, snapshot)
+					// mq.Publish(BETXIN_WORKER, snapshot)
 				}(snapshot)
 			}
 		}
