@@ -91,7 +91,7 @@ func InitRouter(signal chan os.Signal) {
 	r.POST("/api/v1/usertotopic/:id", usertotopic.GetUserToTopic)
 	r.POST("/api/v1/mixpayorder/:traceid", mixpayorder.GetMixpayOrder)
 	r.POST("/api/v1/comment/:tid", comment.ListCommentByTid)
-	r.POST("/api/v1/mixpayorder/update", mixpayorder.UpdateMixpayOrder)
+	r.POST("/api/v1/mixpayorder/update", mixpayorder.UpdateMixpayOrder) 
 
 	// administrator.CreateAdministratorME()
 

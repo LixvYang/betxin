@@ -80,10 +80,9 @@ type Response struct {
 }
 
 func SendResponse(c *gin.Context, code int, data interface{}) {
-	message := errmsg.GetErrMsg(code)
 	c.JSON(http.StatusOK, Response{
 		Code:    code,
-		Message: message,
+		Message: errmsg.GetErrMsg(code),
 		Data:    data,
 	})
 }
